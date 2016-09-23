@@ -24,7 +24,7 @@ public class Amex extends AbstractCreditCard {
 	 */
 
 	public Amex(String number) throws IllegalArgumentException {
-		super(CardType.AMEX, validateNumber(number));
+		super(CardType.AMEX, validateNumber(new String(number)));
 	}
 
 	/**
