@@ -1,31 +1,67 @@
 package dw317.lib;
 
-public class Email  {
+/**
+ * 
+ * @author Matt, Mher, Tahar
+ * 
+ * This program represents a single Email
+ *
+ */
+public class Email implements Comparable<Email >{
+
 
 	protected static final long serialVersionUID = 42031768871L;
 	protected final String address;
+	
+	/**
+	 * 
+	 * Constructor
+	 * 
+	 * @param address: the full address of the email
+	 */
 
 	public Email(String address) {
 
 		this.address = validateEmail(address);
 	}
+	
+	/**
+	 * 
+	 * Address Getter
+	 * 
+	 * @return a copy of the address
+	 */
 
 	public String getAddress() {
 
 		return new String(this.address);
 	}
+	
+	/**
+	 * 
+	 * User ID Getter
+	 * 
+	 * @return the user ID
+	 */
 
 	public String getUserId() {
 
 		String userId = this.address.substring(0, this.getAddress().indexOf('@'));
 		return userId;
 	}
+	
+	/**
+	 * 
+	 * Host Getter
+	 * 
+	 * @return the host
+	 */
 
 	public String getHost() {
 		String host = this.address.substring(this.getAddress().indexOf('@'));
 		return host;
 	}
-
+	
 	@Override
 	public String toString() {
 		return getAddress();
@@ -38,7 +74,15 @@ public class Email  {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		return result;
 	}
-
+	
+	/**
+	 * 
+	 * Overrides the equals method
+	 * 
+	 * If two email addresses are identical, then they are equal
+	 * 
+	 */
+	
 	@Override
 	public final boolean equals(Object obj) {
 		if (this == obj)
@@ -55,8 +99,19 @@ public class Email  {
 			return false;
 		return true;
 	}
-
-	public int compareToIgnoreCase(Email email) {
+	
+	/**
+	 * 
+	 * Override compareTo method. Emails are ordered alphabetically
+	 * by their host names. If their host names are identical, then
+	 * they are ordered alphabetically by their user ID
+	 * 
+	 * @param email: the Email object
+	 * @return 1 if greater than, -1 if less than, 0 if equal
+	 */
+	
+	@Override
+	public int compareTo(Email email) {
 
 		if (this.getHost().compareToIgnoreCase(email.getHost()) > 0)
 			return 1;
@@ -72,6 +127,27 @@ public class Email  {
 
 		return 0;
 	}
+	
+	/**
+	 * 
+	 * Validates the email. An email is valid if:
+	 * 
+	 * the UserID -
+	 * 		- consists of 1-32 characters
+	 * 		- consists of only numbers, letters, hyphens, underscores or dots (but not two in a row)
+	 * 		- does not begin or end with a special character
+	 * 
+	 * the Host -
+	 * 		- contains 1 or more segments, separated by a dot
+	 * 		- each segment consists of 1-32 characters
+	 * 		- each segment consists of only numbers, letters and hyphens
+	 * 		- segments do not begin or end with a hyphen
+	 * 
+	 * @param email: the email String
+	 * @return the email if valid, an exception if invalid
+	 * @throws IllegalArgumentException: if any of the above validations are not met
+	 * 
+	 */
 
 	private String validateEmail(String email) throws IllegalArgumentException{
 		
@@ -143,6 +219,14 @@ public class Email  {
 		
 	}
 	
+	/**
+	 * 
+	 * Legal characters for the User ID
+	 * 
+	 * @param c: the char
+	 * @return true if legal, false if illegal
+	 */
+	
 	private boolean isLegalChar(char c) {
 		
 		if (c == '-')
@@ -155,3 +239,4 @@ public class Email  {
 	}
 
 }
+
