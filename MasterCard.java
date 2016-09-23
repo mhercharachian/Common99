@@ -1,4 +1,3 @@
-
 package dw317.lib.creditcard;
 
 /**
@@ -33,6 +32,13 @@ public class MasterCard extends AbstractCreditCard {
 
 	private static String validateNumber(String number) throws IllegalArgumentException {
 
+		number=number.trim();
+		if (number == null)
+			throw new NullPointerException("Number cannot be null");
+		
+		if (number.isEmpty())
+			throw new IllegalArgumentException("Number cannot be empty");
+		
 		long num = 0;
 		int length = number.length();
 		
@@ -59,3 +65,4 @@ public class MasterCard extends AbstractCreditCard {
 	}
 
 }
+
