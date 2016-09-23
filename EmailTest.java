@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * @author Matt, Mher, Tahar
  * 
- *         This program tests the Name class
+ *         This program tests the Email class
  *
  */
 public class EmailTest {
