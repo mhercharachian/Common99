@@ -54,7 +54,11 @@ public abstract class AbstractCreditCard implements CreditCard {
 	
 	@Override
 	public final int hashCode() {
-		return this.hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cardType == null) ? 0 : cardType.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		return result;
 	}
 	
 	/**
@@ -106,3 +110,4 @@ public abstract class AbstractCreditCard implements CreditCard {
 		return number;
 	}
 }
+
