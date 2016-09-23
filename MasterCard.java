@@ -18,7 +18,7 @@ public class MasterCard extends AbstractCreditCard {
 	 */
 
 	public MasterCard(String number) throws IllegalArgumentException {
-		super(CardType.MASTERCARD, validateNumber(number));
+		super(CardType.MASTERCARD, validateNumber(new String(number)));
 	}
 	
 	/**
