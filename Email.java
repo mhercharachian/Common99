@@ -176,13 +176,14 @@ public class Email implements Comparable<Email >{
 				throw new IllegalArgumentException("Invalid character in userID");
 			
 			// validate that there aren't two dots in a row
-			if (currentChar > 0)
+			if (userId.indexOf(currentChar) > 0)
 				if (currentChar == '.' && userId.charAt(i-1) == '.')
-					throw new IllegalArgumentException("Invalid User ID");
+					throw new IllegalArgumentException("User ID cannot have two dots in a row");
+			
 		}
 		
 		if(userId.charAt(0) == '.' || userId.charAt(userId.length()-1) == '.')
-			throw new IllegalArgumentException("Invalid User ID");
+			throw new IllegalArgumentException("User ID cannot begin or end with a dot");
 ;
 		final char delimiter = '.';
 		
