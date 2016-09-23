@@ -51,17 +51,23 @@ public class NameTest {
 				break;
 
 			case 7:
-				System.out.println("This should be invalid due to the apostrophe not being between two letters");
+				System.out.println("This should be invalid due to the apostrophe not being between two letters: ");
 				Name name7 = new Name("Livin'", "It Up");
 				break;
 				
 			case 8:
-				System.out.println("This should be invalid due to the hyphen not being between two letters");
+				System.out.println("This should be invalid due to the hyphen not being between two letters: ");
 				Name name8 = new Name("A-","Is Your Grade");
+				
+			case 9:
+				System.out.println("This should be invalid due to the hyphen not being between two letters: ");
+				Name name9 = new Name("-Adam-","Is A Man");
 			}
 
 		} catch (IllegalArgumentException iae) {
 			System.out.println(iae.getMessage());
+		} catch (NullPointerException npe) {
+			System.out.println(npe.getMessage());
 		}
 
 	}
