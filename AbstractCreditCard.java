@@ -78,7 +78,7 @@ public abstract class AbstractCreditCard implements CreditCard {
 	 */
 
 	public String getNumber() {
-		return this.number;
+		return new String(this.number);
 	}
 	
 	/**
