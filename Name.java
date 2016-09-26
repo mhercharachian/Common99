@@ -55,8 +55,8 @@ public class Name implements Serializable {
 	 * @param firstName
 	 */
 
-	private void setFirstName(String firstName) {
-		this.firstName = validateName(firstName);
+	public void setFirstName(String firstName) {
+		this.firstName = validateName(new String(firstName));
 	}
 
 	/**
@@ -75,8 +75,8 @@ public class Name implements Serializable {
 	 * @param lastName
 	 */
 
-	private void setLastName(String lastName) {
-		this.lastName = validateName(lastName);
+	public void setLastName(String lastName) {
+		this.lastName = validateName(new String(lastName));
 	}
 
 	/**
