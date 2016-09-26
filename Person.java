@@ -8,15 +8,15 @@ public class Person {
 	Name name;
 
 	public Person(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.firstName = new String(firstName);
+		this.lastName = new String(lastName);
 		this.address = null;
 	}
 	
 	public Person(String firstName, String lastName, Address address) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
+		this.firstName = new String(firstName);
+		this.lastName = new String(lastName);
+		this.address = new String(address);
 	}
 
 	public Name getName() {
