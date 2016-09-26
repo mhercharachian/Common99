@@ -19,6 +19,11 @@ public class Address {
 		this.streetName = validateExistence("street name", streetName);
 		this.city = validateExistence("city", city);
 	}
+ public Address(Address address) {
+	 this.civicNumber = address.civicNumber;
+	 this.streetName = address.streetName;
+	 this.city = address.city;
+ }
 
  public String getAddress() {
 	 String address = civicNumber + " " + streetName + "\n" + city;
@@ -79,3 +84,4 @@ private String validateExistence(String fieldName, String fieldValue) {
 }
 
 }
+
