@@ -22,7 +22,7 @@ public class Email implements Comparable<Email >{
 
 	public Email(String address) {
 
-		this.address = validateEmail(address);
+		this.address = validateEmail(new String(address));
 	}
 	
 	/**
