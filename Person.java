@@ -16,7 +16,7 @@ public class Person {
 	public Person(String firstName, String lastName, Address address) {
 		this.firstName = new String(firstName);
 		this.lastName = new String(lastName);
-		this.address = new String(address);
+		this.address = new Address(address);
 	}
 
 	public Name getName() {
