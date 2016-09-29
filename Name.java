@@ -9,8 +9,8 @@ import java.io.Serializable;
  * @author Matt, Mher, Tahar
  *
  */
-public class Name implements Serializable {
-	
+public final class Name implements Serializable {
+
 	private static final long serialVersionUID = 42031768871L;
 	private String firstName;
 	private String lastName;
@@ -95,16 +95,15 @@ public class Name implements Serializable {
 	 * 
 	 * Validates the first and last name. The names are invalid if:
 	 * 
-	 * 	- They consist of less than 2 characters
-	 * 	- They consist of a characters that aren't a 
-	 *    letter, apostrophe('), hyphen(-) or space
-	 *  - They consist of an apostrophe, hyphen or space
-	 *    that aren't between two letters
+	 * - They consist of less than 2 characters - They consist of a characters
+	 * that aren't a letter, apostrophe('), hyphen(-) or space - They consist of
+	 * an apostrophe, hyphen or space that aren't between two letters
 	 * 
 	 * 
 	 * @param name
 	 * @return the name, if valid
-	 * @throws IllegalArgumentException if the name is invalid
+	 * @throws IllegalArgumentException
+	 *             if the name is invalid
 	 */
 
 	private static String validateName(String name) throws IllegalArgumentException {
@@ -121,38 +120,41 @@ public class Name implements Serializable {
 
 		char c;
 		int length = name.length();
-		
+
 		// if there is a special character at the beginning or end of the name,
 		// throw an exception
-		if (isLegalChar(name.charAt(0)) || isLegalChar(name.charAt(length-1)))
+		if (isLegalChar(name.charAt(0)) || isLegalChar(name.charAt(length - 1)))
 			throw new IllegalArgumentException("Special characters must be in between two letters");
-		
+
 		for (int i = length - 1; i >= 0; i--) {
 			c = name.charAt(i);
 
-			// if char is not a letter nor a special character, throw an exception
+			// if char is not a letter nor a special character, throw an
+			// exception
 			if (!Character.isLetter(c) && !isLegalChar(c))
 				throw new IllegalArgumentException("First or last name cannot contain " + name.charAt(i));
-			
+
 			// before validating that the chars are legal, make sure we don't
 			// get an IndexOutOfBounds error
-			if (name.charAt(i) > 0 && name.charAt(i) < length-1)
+			if (name.charAt(i) > 0 && name.charAt(i) < length - 1)
 				// if the char is a special character, check to
-				// see if the chars next to it are letters. If they are not, throw an exception
+				// see if the chars next to it are letters. If they are not,
+				// throw an exception
 				if (isLegalChar(c))
-					if (Character.isLetter((name.charAt(i - 1))) && Character.isLetter((name.charAt(i + 1))))
-						continue;
-					else
-						throw new IllegalArgumentException(c + " must be in between two letters");
+				if (Character.isLetter((name.charAt(i - 1))) && Character.isLetter((name.charAt(i + 1))))
+					continue;
+				else
+					throw new IllegalArgumentException(c + " must be in between two letters");
 		}
 		return name;
 	}
-	
+
 	/**
 	 * 
 	 * Validates if the char is legal in a name
 	 * 
-	 * @param c: the char being validated
+	 * @param c:
+	 *            the char being validated
 	 * @return true if the char is legal, false if not
 	 */
 
@@ -165,6 +167,50 @@ public class Name implements Serializable {
 			return true;
 
 		return false;
+	}
+	
+	/**
+	 * 
+	 * Override the hashCode method to final because we overrode the equals method to final
+	 * Convert firstName and lastName to upper case, since the name should be case insensitive
+	 * 
+	 */
+
+	@Override
+	public final int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((firstName == null) ? 0 : firstName.toUpperCase().hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.toUpperCase().hashCode());
+		return result;
+	}
+	
+	/**
+	 * 
+	 * Override the equals method to final
+	 * 
+	 */
+
+	@Override
+	public final boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Name))
+			return false;
+		Name other = (Name) obj;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		return true;
 	}
 
 }
