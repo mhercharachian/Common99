@@ -6,7 +6,7 @@ package dw317.lib.creditcard;
  * This program acts as a single MasterCard, which extends from the AbstractCreditCard class.
  * 
  */
-public class MasterCard extends AbstractCreditCard {
+public final class MasterCard extends AbstractCreditCard {
 
 	private static final long serialVersionUID = 42031766871L;
 	
