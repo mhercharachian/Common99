@@ -10,7 +10,7 @@ package dw317.lib.creditcard;
  *         AbstractCreditCard class.
  * 
  */
-public class Amex extends AbstractCreditCard {
+public final class Amex extends AbstractCreditCard {
 
 	private static final long serialVersionUID = 42031766871L;
 
