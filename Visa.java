@@ -9,7 +9,7 @@ package dw317.lib.creditcard;
  * This program acts as a single Visa, which extends from the AbstractCreditCard class.
  * 
  */
-public class Visa extends AbstractCreditCard {
+public final class Visa extends AbstractCreditCard {
 	
 	/**
 	 * 
