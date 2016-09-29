@@ -76,19 +76,20 @@ public class Email implements Comparable<Email >{
 	/**
 	 * 
 	 * Overrides the hash code method to final, since we overrode the equals method to final
+	 * Convert address to upper case because email is case insensitive
 	 * 
 	 */
 	
 	@Override
 	public final int hashCode() {
-		return this.address.hashCode();
+		return this.address.toUpperCase().hashCode();
 	}
 	
 	/**
 	 * 
 	 * Overrides the equals method
 	 * 
-	 * If two email addresses are identical, then they are equal
+	 * If two emails have the same address (case insensitive), then they are equal
 	 * 
 	 */
 	
@@ -104,7 +105,7 @@ public class Email implements Comparable<Email >{
 		if (address == null) {
 			if (other.address != null)
 				return false;
-		} else if (!address.equals(other.address))
+		} else if (!address.equalsIgnoreCase(other.address))
 			return false;
 		return true;
 	}
@@ -162,10 +163,10 @@ public class Email implements Comparable<Email >{
 
 	private String validateEmail(String email) throws IllegalArgumentException{
 		
-		email=email.trim();
-		
 		if (email == null)
 			throw new NullPointerException("ts,ts,ts");
+		
+		email=email.trim();
 		
 		if (email.isEmpty())
 			throw new IllegalArgumentException("Email cannot be empty");
