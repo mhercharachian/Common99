@@ -62,13 +62,26 @@ public class Email implements Comparable<Email >{
 		return host;
 	}
 	
+	/**
+	 * 
+	 * Override the toString method to return the address
+	 * 
+	 */
+	
 	@Override
 	public String toString() {
 		return getAddress();
 	}
+	
+	/**
+	 * 
+	 * Overrides the hash code method to final, since we overrode the equals method to final
+	 * 
+	 */
+	
 	@Override
 	public final int hashCode() {
-		return address.hashCode();
+		return this.address.hashCode();
 	}
 	
 	/**
@@ -80,12 +93,12 @@ public class Email implements Comparable<Email >{
 	 */
 	
 	@Override
-	public final boolean equals(Object obj) {
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		if (this.getClass() != obj.getClass())
+		if (!(obj instanceof Email))
 			return false;
 		Email other = (Email) obj;
 		if (address == null) {
@@ -110,20 +123,22 @@ public class Email implements Comparable<Email >{
 	public int compareTo(Email email) {
 
 		if (this.getHost().compareToIgnoreCase(email.getHost()) > 0)
-			return 1;
+			return -1;
 
 		if (this.getHost().compareToIgnoreCase(email.getHost()) < 0)
-			return -1;
-
-		if (this.getUserId().compareToIgnoreCase(email.getUserId()) > 0)
 			return 1;
 
-		if (this.getUserId().compareToIgnoreCase(email.getUserId()) < 0)
+		if (this.getUserId().compareToIgnoreCase(email.getUserId()) > 0)
 			return -1;
+
+		if (this.getUserId().compareToIgnoreCase(email.getUserId()) < 0)
+			return 1;
 
 		return 0;
 	}
 	
+
+
 	/**
 	 * 
 	 * Validates the email. An email is valid if:
