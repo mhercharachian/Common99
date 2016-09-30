@@ -71,8 +71,7 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public int getNumberDays() {
-		// TODO Auto-generated method stub
-		return 0;
+		return DAYS.between(this.checkinDate,this.checkoutDate);
 	}
 
 	@Override
