@@ -3,9 +3,7 @@
  */
 package group99.hotel.business;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-
+import java.time.DateTimeException;import java.time.LocalDate;java.time.temporal.ChronoUnit;
 import group99.hotel.business.interfaces.Customer;
 import group99.hotel.business.interfaces.Reservation;
 import group99.hotel.business.interfaces.Room;
@@ -40,9 +38,21 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public int compareTo(Reservation o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		if(this.getRoom().compareTo(o.getRoom()) == 0 ){
+			
+			if (this.getCheckInDate().isBefore(o.getCheckInDate())){
+				return -1;
+			}
+			else return 1;
+			
+		}
+		
+		else if(this.getRoom().compareTo(o.getRoom()) == -1 ){
+			return -1;
+		}
+		
+		else return 1;
+	}//????//
 
 	@Override
 	public Customer getCustomer() {
@@ -53,25 +63,24 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public Room getRoom() {
-		// TODO Auto-generated method stub
-		return null;
+		Room copy = new DawsonRoom(this.room.getRoomNumber(), this.room.getRoomType());
 	}
 
 	@Override
 	public LocalDate getCheckInDate() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return LocalDate.of(this.checkinDate.getYear(), this.checkinDate.getMonth(), this.checkinDate.getDayOfMonth());
 	}
 
 	@Override
 	public LocalDate getCheckOutDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return LocalDate.of(this.checkoutDate.getYear(), this.checkoutDate.getMonth(),
+				this.checkoutDate.getDayOfMonth());
 	}
 
 	@Override
 	public int getNumberDays() {
-		return DAYS.between(this.checkinDate,this.checkoutDate);
+		return DAYS.between(this.checkinDate, this.checkoutDate);
 	}
 
 	@Override
@@ -124,4 +133,14 @@ public class DawsonReservation implements Reservation {
 				+ this.checkoutDate.getMonth() + "*" + this.checkoutDate.getDayOfMonth() + "*" + room.getRoomNumber();
 	}
 
+	public boolean overlap(Reservation other) {
+
+		if (this.getRoom().equals(other.getRoom())) {
+			if (!(this.getCheckInDate().isAfter(other.getCheckOutDate()))
+					|| !(this.getCheckOutDate().isBefore(other.getCheckInDate()))) {
+				return true;
+			}
+		}
+		else return false;
+	}
 }
